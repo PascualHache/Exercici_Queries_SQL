@@ -18,12 +18,28 @@
 #ON flights.Origin = airports.iata
 #ORDER BY airports.city, colYear, colMonth ASC;
 
-#Pregunta 5
-SELECT UniqueCarrier, colYear, colMonth, SUM(Cancelled)
-FROM flights
-GROUP BY UniqueCarrier
-ORDER BY Cancelled DESC;
+#Pregunta 5 TO DO
+#SELECT UniqueCarrier, colYear, colMonth, SUM(Cancelled)
+#FROM flights
+#GROUP BY UniqueCarrier
+#ORDER BY Cancelled DESC;
 
 #Pregunta 6
+#SELECT Tailnum, Distance
+#FROM flights
+#ORDER BY Distance DESC LIMIT 10;
+
+# En el ejemplo, no aparece ningun Tailnum vacio, si se quiere una query donde 
+#se devuelvan los 10 aviones con Tailnum sería este:
+#SELECT Tailnum, Distance
+#FROM flights
+#WHERE Tailnum != ''
+#ORDER BY Distance DESC LIMIT 10;
+
 
 #Pregunta 7
+#SELECT UniqueCarrier, AVG(ArrDelay)
+#FROM flights
+#WHERE ArrDelay > 10
+#GROUP BY UniqueCarrier
+#ORDER BY AVG(ArrDelay) DESC;
