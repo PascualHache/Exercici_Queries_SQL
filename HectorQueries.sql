@@ -1,45 +1,42 @@
 #Pregunta 1
-#SELECT COUNT(*) FROM flights;
+#SELECT COUNT(*) AS total FROM flights;
 
 #Pregunta 2
-#SELECT Origin, AVG(ArrDelay), AVG(DepDelay)
+#SELECT Origin, AVG(ArrDelay) AS prom_arribades, AVG(DepDelay) AS prom_sortides
 #FROM flights
 #GROUP BY Origin;
 
 #Pregunta 3
-#SELECT Origin, colYear, colMonth, ArrDelay
+#SELECT Origin, colYear, colMonth, FORMAT(ArrDelay,4) AS prom_arribades
 #FROM flights
 #ORDER BY Origin, colYear, colMonth ASC;	
 
 #Pregunta 4
-#SELECT airports.city, colYear, colMonth, ArrDelay
+#SELECT airports.city, colYear, colMonth, AVG(ArrDelay) AS prom_arribades
 #FROM flights
-#LEFT JOIN usairlineflights.airports
+#JOIN usairlineflights.airports
 #ON flights.Origin = airports.iata
+#GROUP BY colMonth, colYear
 #ORDER BY airports.city, colYear, colMonth ASC;
 
-#Pregunta 5 TO DO
-#SELECT UniqueCarrier, colYear, colMonth, SUM(Cancelled)
+#Pregunta 5 
+#OK
+#SELECT UniqueCarrier, colYear, colMonth, SUM(Cancelled) AS total_cancelled
 #FROM flights
-#GROUP BY UniqueCarrier
-#ORDER BY Cancelled DESC;
+#WHERE Cancelled <> 0
+#GROUP BY UniqueCarrier, colYear, colMonth
+#ORDER BY SUM(Cancelled) DESC;
 
 #Pregunta 6
-#SELECT Tailnum, Distance
-#FROM flights
-#ORDER BY Distance DESC LIMIT 10;
-
-# En el ejemplo, no aparece ningun Tailnum vacio, si se quiere una query donde 
-#se devuelvan los 10 aviones con Tailnum sería este:
-#SELECT Tailnum, Distance
+#SELECT Tailnum, SUM(Distance)
 #FROM flights
 #WHERE Tailnum != ''
-#ORDER BY Distance DESC LIMIT 10;
-
+#GROUP BY Tailnum
+#ORDER BY SUM(Distance) DESC LIMIT 10;
 
 #Pregunta 7
-#SELECT UniqueCarrier, AVG(ArrDelay)
-#FROM flights
+SELECT UniqueCarrier, AVG(ArrDelay) AS avgDelay
+FROM flights
 #WHERE ArrDelay > 10
-#GROUP BY UniqueCarrier
-#ORDER BY AVG(ArrDelay) DESC;
+GROUP BY UniqueCarrier
+ORDER BY AVG(ArrDelay) DESC;
